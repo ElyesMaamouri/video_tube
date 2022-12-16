@@ -1,12 +1,24 @@
 import mongoose from "mongoose";
 import User from '../models/User.js';
+import bcrypt from "bcryptjs";
+import { createError } from "../utilis/error.js";
 
+export const signin = async (req, res, next) => {
+    try {
+    
+    } catch (err) {
+        next(createError(404,"not found sorry !"))
+    }
+}  
 
-export const signup = (req, res) => {
- try {
-const newUser = new User(req.body)
-console.log('newuser', newUser)
- }catch (err) {
-
- }
+export const signup = async (req, res, next) => {
+    try {
+        const salt = bcrypt.genSaltSync(10)
+        const hash = bcrypt.hashSync(req.body.password, salt);
+        const newUser = new User({ ...req.body, password: hash })
+        await newUser.save()
+        res.status(200).send("user has been created")
+    } catch (err) {
+        next()
+    }
 }  
