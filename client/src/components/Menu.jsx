@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import LogoTube from "../assets/img/logo.png"
 import HomeIcon from '@mui/icons-material/Home';
-
+import {Link} from "react-router-dom";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
@@ -17,7 +17,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
- 
+
 
 
 const Container = styled.div`
@@ -50,9 +50,7 @@ const Item = styled.div`
  gap: 20px;
  cursor: pointer;
  padding: 7.5px 0px;
- &:hover {
-   background-color: ${({ theme }) => theme.soft};
- }
+ 
 `;
 
 const Hr = styled.hr`
@@ -86,10 +84,14 @@ const Menu = () => {
     return (
         <Container>
             <Wrapper>
-                <Logo>
-                    <Img src={LogoTube} />
-                    VideoTube
-                </Logo>
+
+                <Link to="/" style={{ textDecoration: "none", color:"inherit" }}>
+                    <Logo>
+                        <Img src={LogoTube} />
+                        VideoTube
+                    </Logo>
+                </Link>
+
                 <Item>
                     <HomeIcon />
                     Home</Item>

@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Container = styled.div`
 postion : sticky;
 top : 0;
+margin-bottom: 25px;
 `
 
 
@@ -59,7 +60,7 @@ const Navbar =() => {
     <Container>
       <Wrapper>
         <Search>
-         <Input placeholder='Search Here' />
+         <Input placeholder='Search Here'/>
          <SearchIcon />
         </Search>
         <Button>
