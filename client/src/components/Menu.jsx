@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import LogoTube from "../assets/img/logo.png"
 import HomeIcon from '@mui/icons-material/Home';
- 
+
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
@@ -17,7 +17,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
+ 
 
 
 const Container = styled.div`
@@ -32,7 +32,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
  padding : 18px 26px`;
 
- const Logo =styled.div`
+const Logo = styled.div`
  display : flex;
  align-items : center;
  gap : 5px;
@@ -40,11 +40,11 @@ const Wrapper = styled.div`
  margin-bottom : 25px;
  font-size : 14px;
  `
- const Img = styled.img`
+const Img = styled.img`
  height : 25px;
  `
 
- const Item = styled.div`
+const Item = styled.div`
  display: flex;
  align-items: center;
  gap: 20px;
@@ -86,83 +86,80 @@ const Menu = () => {
     return (
         <Container>
             <Wrapper>
-               <Logo>
-                <Img src={LogoTube} />
-                VideoTube
-               </Logo>
-               <Item>
-                <HomeIcon />
-                Home</Item>
-
-
-
+                <Logo>
+                    <Img src={LogoTube} />
+                    VideoTube
+                </Logo>
                 <Item>
-          <ExploreOutlinedIcon />
-          Explore
-        </Item>
-        <Item>
-          <SubscriptionsOutlinedIcon />
-          Subscriptions
-        </Item>
-        <Hr />
-        <Item>
-          <VideoLibraryOutlinedIcon />
-          Library
-        </Item>
-        <Item>
-          <HistoryOutlinedIcon />
-          History
-        </Item>
-        <Hr />
-        <Login>
-          Sign in to like videos, comment, and subscribe.
-          
-            <Button>
-              <AccountCircleOutlinedIcon />
-              SIGN IN
-            </Button>
-        
-        </Login>
-        <Hr />
-        <Title>YouTube</Title>
-        <Item>
-          <LibraryMusicOutlinedIcon />
-          Music
-        </Item>
-        <Item>
-          <SportsBasketballOutlinedIcon />
-          Sports
-        </Item>
-        <Item>
-          <SportsEsportsOutlinedIcon />
-          Gaming
-        </Item>
-        <Item>
-          <MovieOutlinedIcon />
-          Movies
-        </Item>
-        <Item>
-          <ArticleOutlinedIcon />
-          News
-        </Item>
-        <Item>
-          <LiveTvOutlinedIcon />
-          Live
-        </Item>
-        <Hr />
-        <Item>
-          <SettingsOutlinedIcon />
-          Settings
-        </Item>
-        <Item>
-          <FlagOutlinedIcon />
-          Report
-        </Item>
-        <Item>
-          <HelpOutlineOutlinedIcon />
-          Help
-        </Item>
-      
+                    <HomeIcon />
+                    Home</Item>
+                <Item>
+                    <ExploreOutlinedIcon />
+                    Explore
+                </Item>
+                <Item>
+                    <SubscriptionsOutlinedIcon />
+                    Subscriptions
+                </Item>
+                <Hr />
+                <Item>
+                    <VideoLibraryOutlinedIcon />
+                    Library
+                </Item>
+                <Item>
+                    <HistoryOutlinedIcon />
+                    History
+                </Item>
+                <Hr />
+                <Login>
+                    Sign in to like videos, comment, and subscribe.
+
+                    <Button>
+                        <AccountCircleOutlinedIcon />
+                        SIGN IN
+                    </Button>
+
+                </Login>
+                <Hr />
+                <Title>YouTube</Title>
+                <Item>
+                    <LibraryMusicOutlinedIcon />
+                    Music
+                </Item>
+                <Item>
+                    <SportsBasketballOutlinedIcon />
+                    Sports
+                </Item>
+                <Item>
+                    <SportsEsportsOutlinedIcon />
+                    Gaming
+                </Item>
+                <Item>
+                    <MovieOutlinedIcon />
+                    Movies
+                </Item>
+                <Item>
+                    <ArticleOutlinedIcon />
+                    News
+                </Item>
+                <Item>
+                    <LiveTvOutlinedIcon />
+                    Live
+                </Item>
+                <Hr />
+                <Item>
+                    <SettingsOutlinedIcon />
+                    Settings
+                </Item>
+                <Item>
+                    <FlagOutlinedIcon />
+                    Report
+                </Item>
+                <Item>
+                    <HelpOutlineOutlinedIcon />
+                    Help
+                </Item>
+
             </Wrapper>
         </Container>
     )

@@ -15,14 +15,29 @@ align-items : center;
 height : 100%;
 padding : 0px 20px;
 justify-content : flex-end;
+postion : relative;
 
 `
 
 
-const Search = styled.div``
+const Search = styled.div`
+postion : absolute;
+width : 40%;
+left : 0px;
+right :0px;
+margin : auto;
+display : flex;
+align-items : center;
+justify-content : space-between;
+padding : 5px;
+border : 1px solid #ccc;
+border-radius : 3px;
+`
 
 
-const Input = styled.input``
+const Input = styled.input`
+border : none;
+`
 
 
 const Button = styled.button`
@@ -32,7 +47,7 @@ border: 1px solid #3ea6ff;
 color: #3ea6ff;
 border-radius: 3px;
 font-weight: 500;
-margin-top: 10px;
+ 
 cursor: pointer;
 display: flex;
 align-items: center;
