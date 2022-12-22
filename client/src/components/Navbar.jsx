@@ -2,6 +2,7 @@ import { AccountCircleOutlined } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react'
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
 postion : sticky;
@@ -55,18 +56,20 @@ align-items: center;
 gap: 5px;`
 
 
-const Navbar =() => {
+const Navbar = () => {
   return (
     <Container>
       <Wrapper>
         <Search>
-         <Input placeholder='Search Here'/>
-         <SearchIcon />
+          <Input placeholder='Search Here' />
+          <SearchIcon />
         </Search>
-        <Button>
-            <AccountCircleOutlined/>
+        <Link to="signin" style={{textDecoration:"none"}}>
+          <Button>
+            <AccountCircleOutlined />
             SIGN IN
           </Button>
+        </Link>
       </Wrapper>
     </Container>
   )

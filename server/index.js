@@ -5,6 +5,7 @@ import userRoutes from "./routes/user.js"
 import videoRoutes from "./routes/videos.js"
 import commentRoutes from "./routes/comments.js"
 import authRoutes from "./routes/auth.js"
+import cookieParser from "cookie-parser";
 //Create server
 const app = express();
 dotenv.config();
@@ -19,8 +20,10 @@ const connectToDataBase = () => {
     })
 }
 
-//Routes
+app.use(cookieParser());
+// Allow application to take any json file
 app.use(express.json())
+//Routes
 app.use('/api/users', userRoutes)
 app.use('/api/videos', videoRoutes)
 app.use('/api/comments', commentRoutes)

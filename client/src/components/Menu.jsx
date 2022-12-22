@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import LogoTube from "../assets/img/logo.png"
 import HomeIcon from '@mui/icons-material/Home';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
@@ -88,7 +88,7 @@ const Menu = () => {
         <Container>
             <Wrapper>
 
-                <Link to="/" style={{ textDecoration: "none", color:"inherit" }}>
+                <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
                     <Logo>
                         <Img src={LogoTube} />
                         VideoTube
@@ -119,10 +119,14 @@ const Menu = () => {
                 <Login>
                     Sign in to like videos, comment, and subscribe.
 
-                    <Button>
-                        <AccountCircleOutlinedIcon />
-                        SIGN IN
-                    </Button>
+                    <Link to="signin">
+
+                        <Button>
+                            <AccountCircleOutlinedIcon />
+                            SIGN IN
+                        </Button>
+
+                    </Link>
 
                 </Login>
                 <Hr />
