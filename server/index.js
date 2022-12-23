@@ -6,8 +6,10 @@ import videoRoutes from "./routes/videos.js"
 import commentRoutes from "./routes/comments.js"
 import authRoutes from "./routes/auth.js"
 import cookieParser from "cookie-parser";
+
 //Create server
 const app = express();
+
 dotenv.config();
 
 //Connect to database
@@ -20,7 +22,7 @@ const connectToDataBase = () => {
     })
 }
 
-app.use(cookieParser());
+app.use(cookieParser())
 // Allow application to take any json file
 app.use(express.json())
 //Routes
@@ -30,7 +32,8 @@ app.use('/api/comments', commentRoutes)
 app.use('/api/auth', authRoutes)
 // Handling errors express server
 app.use((err, req,res,next)=> {
-    const status = err.status ||500;
+    
+    const status = err.status || 500;
     const message = err.message || "Something went wrong";
     return res.status(status).json({
         success: false,
@@ -38,6 +41,17 @@ app.use((err, req,res,next)=> {
         message : message
     })
 })
+
+
+// Test Cookies
+// app.get('/', function (req, res) {
+//     // Cookies that have not been signed
+//     console.log('Cookies: ', req.cookies)
+  
+//     // Cookies that have been signed
+//     console.log('Signed Cookies: ', req.signedCookies)
+//   })
+
 
 // Server
 app.listen(process.env.PORT_SERVER, () => {
