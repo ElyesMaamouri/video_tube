@@ -14,7 +14,7 @@ const Home = ({type}) => {
         const fetchVideos = async () => {
             const res = await axios.get(`/videos/${type}`)
             setVideos(res.data)
-;        console.log('i fire once', res.data);
+;  
         }
         fetchVideos()
 
@@ -23,7 +23,7 @@ const Home = ({type}) => {
         <Container>
             {  videos.map((video) => {
              
-              return  <Card key={video._id}/>
+              return  <Card key={video._id} video={video}/>
                
             })}
         </Container>
