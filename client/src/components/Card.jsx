@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Link } from "react-router-dom";
-import { format } from "timeago.js"
+// import { format } from "timeago.js"
 import axios from 'axios';
 
 const Container = styled.div`
@@ -69,7 +69,7 @@ const Card = ({ type, video }) => {
                     <Texts>
                         <Title>{video.title}</Title>
                         <ChannelName>{channel.name} </ChannelName>
-                        <Info>{video.views} views •{format(video.createdAt)}</Info>
+                        <Info>{video.views} views •{video.createdAt}</Info>
                     </Texts>
                 </Details>
             </Container>

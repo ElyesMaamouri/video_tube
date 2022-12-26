@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-
+import axios from 'axios';
 const Container = styled.div`
 display:flex;
 flex-direction: column;
@@ -60,20 +60,31 @@ margin-left:30px`;
 
 
 const SignIn = () => {
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const handleLogin =async(e) =>{
+    e.preventDefault();
+    try{
+        const res = await axios.post("http://localhost:8800/api/auth/signin", {name, password});
+        console.log("data", res.data)
+    }catch(err) {
 
-    return (
+    }
+}
+    return ( 
         <Container>
             <Wrapper>
                 <Title>Sign In</Title>
                 <SubTitle> To be continue to 7GeekGamez </SubTitle>
-                <Input placeholder='Username' />
-                <Input placeholder='password' type="password" />
-                <Button>Sign in</Button>
+                <Input placeholder='Username'  onChange={e=>setName(e.target.value)}/>
+                <Input placeholder='password' type="password" onChange={e=>setPassword(e.target.value)}/>
+                <Button onClick={handleLogin}>Sign in</Button>
                 <Title>Or</Title>
-                <Input placeholder='Username' />
-                <Input placeholder='eamil' type="email" />
-                <Input placeholder='password' type="password" />
-                <Button>Sign Up</Button>
+                <Input placeholder='Username' onChange={e=>setName(e.target.value)}/>
+                <Input placeholder='eamil' type="email" onChange={e=>setEmail(e.target.value)}/>
+                <Input placeholder='password' type="password" onChange={e=>setPassword(e.target.value)}/>
+                <Button >Sign Up</Button>
             </Wrapper>
             <More>
                 English(USA)
