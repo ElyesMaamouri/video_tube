@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
+import {auth, provider} from '../utilis/firebase'
 const Container = styled.div`
 display:flex;
 flex-direction: column;
