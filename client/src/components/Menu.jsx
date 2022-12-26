@@ -17,7 +17,8 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-
+import {useSelector} from 'react-redux'
+import { current } from '@reduxjs/toolkit';
 
 
 const Container = styled.div`
@@ -84,6 +85,7 @@ const Title = styled.h2`
 
 const Login = styled.div``;
 const Menu = () => {
+    const {currentUser} = useSelector(state=>state.user)
     return (
         <Container>
             <Wrapper>
@@ -120,7 +122,7 @@ const Menu = () => {
                     History
                 </Item>
                 <Hr />
-                <Login>
+              {!currentUser && <> <Login>
                     Sign in to like videos, comment, and subscribe.
 
                     <Link to="signin">
@@ -132,8 +134,8 @@ const Menu = () => {
 
                     </Link>
 
-                </Login>
-                <Hr />
+                </Login> <Hr /></>}
+                
                 <Title>YouTube</Title>
                 <Item>
                     <LibraryMusicOutlinedIcon />
