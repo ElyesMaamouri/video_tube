@@ -30,5 +30,6 @@ export const userSlice = createSlice({
     },
   });
 // storage > user > currentUser or loading or error
-export const { loginStart, loginSuccess, loginFailure, logout } = userSlice.actions
+export const { loginStart, loginSuccess, loginFailure, logout } =
+  userSlice.actions;
 export default userSlice.reducer
