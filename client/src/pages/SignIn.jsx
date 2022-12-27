@@ -1,9 +1,15 @@
+
+
+
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
-import {auth, provider} from '../utilis/firebase'
+
+
+import { auth, provider } from '../utilis/firebase';
+import { signInWithPopup } from "firebase/auth";
 const Container = styled.div`
 display:flex;
 flex-direction: column;
@@ -38,7 +44,6 @@ width : 100%
 
 
 const Button = styled.button`
-
 border-radius:3px;
 border: none;
 padding: 10px 20px;
@@ -63,33 +68,51 @@ margin-left:30px`;
 
 
 const SignIn = () => {
-const [name, setName] = useState('');
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const dispatch = useDispatch()
-const handleLogin =async(e) =>{
-    e.preventDefault();
-    
-    dispatch(loginStart());
-    try{
-        const res = await axios.post("auth/signin", {name, password});
-       dispatch(loginSuccess(res.data))
-    }catch(err) {
-        dispatch(loginFailure())
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        dispatch(loginStart());
+        try {
+            const res = await axios.post("auth/signin", { name, password });
+            dispatch(loginSuccess(res.data))
+        } catch (err) {
+            dispatch(loginFailure())
+        }
     }
-}
-    return ( 
+
+    const signInWithGoogle = () => {
+        dispatch(loginStart());
+        signInWithPopup(auth, provider).then((result) => {
+            axios.post("/auth/google", {
+                name: result.user.displayName,
+                email: result.user.email,
+                image: result.user.photoURL
+            }).then((res) => {
+                dispatch(loginSuccess(res.data))
+            })
+        }).catch((error) => {
+            dispatch(loginFailure());
+        })
+    }
+    return (
         <Container>
             <Wrapper>
                 <Title>Sign In</Title>
                 <SubTitle> To be continue to 7GeekGamez </SubTitle>
-                <Input placeholder='Username'  onChange={e=>setName(e.target.value)}/>
-                <Input placeholder='password' type="password" onChange={e=>setPassword(e.target.value)}/>
+                <Input placeholder='Username' onChange={e => setName(e.target.value)} />
+                <Input placeholder='password' type="password" onChange={e => setPassword(e.target.value)} />
                 <Button onClick={handleLogin}>Sign in</Button>
+                <Button onClick={signInWithGoogle}>Signin with google</Button>
                 <Title>Or</Title>
-                <Input placeholder='Username' onChange={e=>setName(e.target.value)}/>
-                <Input placeholder='eamil' type="email" onChange={e=>setEmail(e.target.value)}/>
-                <Input placeholder='password' type="password" onChange={e=>setPassword(e.target.value)}/>
+                <Input placeholder='Username' onChange={e => setName(e.target.value)} />
+                <Input placeholder='eamil' type="email" onChange={e => setEmail(e.target.value)} />
+                <Input placeholder='password' type="password" onChange={e => setPassword(e.target.value)} />
                 <Button >Sign Up</Button>
             </Wrapper>
             <More>

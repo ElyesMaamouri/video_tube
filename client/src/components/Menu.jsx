@@ -126,7 +126,6 @@ const Menu = () => {
                     Sign in to like videos, comment, and subscribe.
 
                     <Link to="signin">
-
                         <Button>
                             <AccountCircleOutlinedIcon />
                             SIGN IN
