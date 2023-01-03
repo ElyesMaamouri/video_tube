@@ -7,7 +7,6 @@ import {
 import Home from "./pages/Home";
 import Video from "./pages/Video";
 import SignIn from "./pages/SignIn";
-
 const Container = styled.div`;
 display : flex;`
 const Main = styled.div`
@@ -20,6 +19,7 @@ padding:22px 96px`;
 
 function App() {
   return (
+ 
     <Container>
       <BrowserRouter>
         <Menu />
@@ -42,6 +42,7 @@ function App() {
         </Main>
       </BrowserRouter>
     </Container>
+ 
   );
 }
 

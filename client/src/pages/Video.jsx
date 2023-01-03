@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
+import { useLocation } from "react-router-dom";
 import Comments from '../components/Comments';
 import Card from '../components/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { fetchSuccess, fetchFailure, like, dislike } from '../redux/videoSlice';
+
 
 const Container = styled.div`
 display:flex;
@@ -29,7 +34,7 @@ font-size: 18px;
   margin-top: 20px;
   margin-bottom: 10px;`;
 
-const Details = styled.div`
+const DetailsVideo = styled.div`
 display: flex;
   align-items: center;
   justify-content: space-between;`;
@@ -95,24 +100,65 @@ text-transform: uppercase;
 
 
 const Video = () => {
+    const { currentUser } = useSelector((state) => state.user);
+    const { currentVideo } = useSelector((state) => state.video)
+
+    // Take id video from path
+    const path = useLocation().pathname.split("/")[2];
+    const dispatch = useDispatch();
+    const [video, setVideo] = useState({});
+    const [channel, setChannel] = useState({});
+
+
+
+    useEffect(() => {
+        const fetchVideoData = async () => {
+            console.log('first useeffect')
+            try {
+                const videoRes = await axios.get(`/videos/find/${path}`);
+                console.log('data of video', videoRes.data)
+                const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`);
+                setVideo(videoRes.data)
+                setChannel(channelRes.data);
+                dispatch(fetchSuccess(videoRes.data));
+               
+            } catch (err) {
+                dispatch(fetchFailure());
+            }
+        };
+        fetchVideoData();
+    }, [path, dispatch]);
+
+const handleLike = async () => {
+    await axios.put(`/users/like/${currentVideo._id}`);
+    console.log('like like like')
+    dispatch(like(currentUser._id))
+}
+
+const handleDislike = async () => {
+    await axios.put(`/users/dislike/${currentVideo._id}`);
+    dispatch(dislike(currentUser._id))
+}
+console.log("Alll likes",currentVideo.likes)
     return (
-        //   <div>video</div>
+
         <Container>
             <Content>
                 <VideoWrapper>
-                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/4IxQ5H2CPn4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/4IxQ5H2CPn4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                 </VideoWrapper>
-                <Title>Test Video</Title>
-                <Details>
+                <Title>{currentVideo.title}</Title>
+                <DetailsVideo>
 
-                    <Info>126,525 • 10 day ago</Info>
+                    <Info>{currentVideo.views} views • {currentVideo.createdAt}
+                    </Info>
 
                     <Buttons>
-                        <Button>
-                            <ThumbUpOutlinedIcon /> 123
+                        <Button onClick={handleLike}>
+                            <ThumbUpOutlinedIcon /> {currentVideo.likes?.length} Like
                         </Button>
-                        <Button>
-                            <ThumbDownOffAltOutlinedIcon /> Dislike
+                        <Button onClick={handleDislike}>
+                            <ThumbDownOffAltOutlinedIcon /> {currentVideo.dislikes?.length} Dislike
                         </Button>
                         <Button>
                             <ReplyOutlinedIcon /> Share
@@ -121,16 +167,18 @@ const Video = () => {
                             <AddTaskOutlinedIcon /> Save
                         </Button>
                     </Buttons>
-                </Details>
+                </DetailsVideo>
                 <Hr />
                 <Channel>
                     <ChannelInfo>
-                        <Image src='https://yt3.ggpht.com/ytc/AMLnZu81t6CR-pl7fCLh7tEL1hazE2_P8vSqALGfsi22=s88-c-k-c0x00ffffff-no-rj' />
+                        <Image src={channel.image} />
                         <ChannelDetail>
 
-                            <ChannelName> 7GeekGamez</ChannelName>
-                            <ChannelCounter> 200k subcribes</ChannelCounter>
-                            <Description>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum</Description>
+                            <ChannelName>{channel.name}</ChannelName>
+                            <ChannelCounter> {channel.subscribers} subcribes</ChannelCounter>
+                            <Description>
+                                {currentVideo.description}
+                            </Description>
 
 
                         </ChannelDetail>
@@ -141,18 +189,9 @@ const Video = () => {
                 <Hr />
                 <Comments />
             </Content>
-            <Recommendation>
 
-            <Card type="sm" />
-            <Card type="sm" />
-            <Card type="sm" />
-            <Card type="sm" />
-            <Card type="sm" />
-         
-           
-           
-            </Recommendation>
         </Container>
+
     )
 }
 
